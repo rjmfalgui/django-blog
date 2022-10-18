@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registration</title>
+  </head>
+
+  <body>
+    <h1>Registration</h1>
+    <form action="{% url 'users:user-registration' %}" method="POST" novalidate>
+      {% csrf_token %}
+
+      {% for field in form %}
+      <div class="form-group">
+
+        <label for="formGroupExampleInput" class="form-label">
+          <b>{{ field.label_tag }}</b>
+        </label>
+
+        {{ field }}
+        <br>
+
+        {% for error in field.errors %}
+        <div id="error-span" class="text-danger" style="color: red">
+          {{ error }}
+        </div>
+        {% endfor %}
+
+      </div>
+      {% endfor %}
+
+      <input type="submit" value="Register" />
+
+    </form>
+    <p> Already have an Account? <a href={% url 'users:user-login' %}><button >Login</button></a> </p>
+  </body>
+</html>

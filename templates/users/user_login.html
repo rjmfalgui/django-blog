@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form method="POST" novalidate>
+      {% csrf_token %}
+
+      {% for field in form %}
+      <div class="form-group">
+
+        <label for="formGroupExampleInput" class="form-label">
+          <b>{{ field.label_tag }}</b>
+        </label>
+
+        {{ field }}
+        <br>
+
+        {% for error in field.errors %}
+        <div id="error-span" class="text-danger" style="color: red">
+          {{ error }}
+        </div>
+        {% endfor %}
+
+      </div>
+      {% endfor %}
+
+      <input type="submit" value="Login" />
+    </form>
+    <p>
+      Register Here: <a href={% url 'users:user-registration' %}> <button>Register</button></a>
+    </p>
+  </body>
+</html> 
